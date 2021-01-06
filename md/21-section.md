@@ -13,3 +13,4 @@ Incluye React Hooks Gatsby GraphQL Firestore Redux Context MERN Next.js Styled C
 ### Section 21 : MERN: Creando la API con Node, Express y MongoDB primeros pasos
 
 229. Postman y primeros pasos
+230. Instalando dependencias y script de NPM
