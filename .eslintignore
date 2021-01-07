@@ -1,5 +1,9 @@
+# build artefacts
+node_modules
+dist/*
+coverage/*
+# data definition files
+*.md
 tests
 package.json
 package-lock.json
-node_modules
-*.md

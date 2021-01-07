@@ -1,6 +1,10 @@
 const express = require('express');
+const connectDB = require('./config/db');
+const { logger } = require('./util/logger');
 // Create server
 const app = express();
+// Functions
+connectDB();
 // Environments
 const PORT = process.env.PORT || 4000;
 
@@ -11,7 +15,8 @@ app.get('/', (req, res) => {
 
 const start = async () => {
   app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
+    logger.info('Server is running...');
+    logger.info(`Listening on port ${PORT}`);
   });
 };
 
