@@ -10,5 +10,6 @@ Incluye React Hooks Gatsby GraphQL Firestore Redux Context MERN Next.js Styled C
 
 ## Content
 
-- #### Section 21 : MERN: Creando la API con Node, Express y MongoDB primeros pasos
-- #### Section 22 : MERN: Creando la API - Trabajando con Usuarios
+### Section 22 : MERN: Creando la API - Trabajando con Usuarios
+
+234. Configurando Rutas de usuarios

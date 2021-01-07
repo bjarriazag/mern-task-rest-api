@@ -3,6 +3,15 @@ const path = require('path');
 
 const { combine, timestamp, printf } = format;
 
+// Functions
+const getDateFormat = (date) => {
+  const year = date.getFullYear();
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const resultDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+  return resultDate;
+};
+
 // Custom LOG levels
 const customLevels = {
   levels: {
@@ -30,8 +39,12 @@ const logFormat = printf((parameters) => {
   };
   return `${timestampLog} ${logLevel[level]} : ${path.basename(__filename)} - ${message}`;
 });
+// LOG Name
+const today = new Date();
+const hours = today.getHours() <= 12 ? `${today.getHours()}:00-AM` : `${today.getHours()}:00-PM`;
+const LOG_NAME = `${getDateFormat(today)}/log-${getDateFormat(today)}-${hours}.log`;
+const LOG_DIRECTORY = path.join(__dirname, '..', '..', 'logs', LOG_NAME);
 // LOG options
-const LOG_DIRECTORY = path.join(__dirname, '..', '..', 'logs', 'logger.log');
 const options = {
   levels: customLevels.levels,
   transports: [
