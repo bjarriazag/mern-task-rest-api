@@ -1,4 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
+const bcryptjs = require('bcryptjs');
 const { Response, ResponseData } = require('../util/imports');
 const logger = require('../../util/logger')(module);
 const User = require('../models/user.model');
@@ -27,7 +28,12 @@ exports.createUser = async (req, res) => {
     if (validationResult) {
       return validationResult;
     }
+    // Create user
     user = new User(req.body);
+    // Secret password
+    const salt = await bcryptjs.genSalt(10);
+    user.password = await bcryptjs.hash(user.password, salt);
+    // Save user
     await user.save();
     logger.success(`createUser - ${message}`);
     return res

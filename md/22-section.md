@@ -18,3 +18,4 @@ Incluye React Hooks Gatsby GraphQL Firestore Redux Context MERN Next.js Styled C
 237. Definiendo un Modelo de Usuarios con Mongoose
 238. Insertando usuarios en la BD
 239. Revisando si el usuario no ha sido registrado previamente
+240. Hashear passwords en la base de datos
