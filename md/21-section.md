@@ -15,3 +15,4 @@ Incluye React Hooks Gatsby GraphQL Firestore Redux Context MERN Next.js Styled C
 229. Postman y primeros pasos
 230. Instalando dependencias y script de NPM
 231. Creando el Servidor de Express
+232. Configurando MongoDB con MongoDB Atlas
