@@ -1,13 +1,23 @@
 const { StatusCodes } = require('http-status-codes');
 const bcryptjs = require('bcryptjs');
+const { validationResult } = require('express-validator');
 const { Response, ResponseData } = require('../util/imports');
 const logger = require('../../util/logger')(module);
 const User = require('../models/user.model');
 
 // Functions
-const validationsUser = async (data, res) => {
+const validationsUser = async (req, res) => {
+  // Route validations
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    logger.fail('Route validations', errors);
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json(new Response(StatusCodes.BAD_REQUEST, errors.array()));
+  }
+  // Own validations
   let validationError;
-  const { email } = data;
+  const { email } = req.body;
   const user = await User.findOne({ email });
   if (user) {
     validationError = 'User already exists';
@@ -24,9 +34,9 @@ exports.createUser = async (req, res) => {
   let user;
   const message = 'User created';
   try {
-    const validationResult = await validationsUser(req.body, res);
-    if (validationResult) {
-      return validationResult;
+    const resultValidation = await validationsUser(req, res);
+    if (resultValidation) {
+      return resultValidation;
     }
     // Create user
     user = new User(req.body);

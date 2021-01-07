@@ -19,3 +19,4 @@ Incluye React Hooks Gatsby GraphQL Firestore Redux Context MERN Next.js Styled C
 238. Insertando usuarios en la BD
 239. Revisando si el usuario no ha sido registrado previamente
 240. Hashear passwords en la base de datos
+241. Agregando validación a la API
