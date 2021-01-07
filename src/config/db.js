@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { MONGODB_URI } = require('../util/secrets');
-const { logger, errorHandler } = require('../util/logger');
+const logger = require('../util/logger')(module);
 
 const connectDB = async () => {
   try {
@@ -11,7 +11,7 @@ const connectDB = async () => {
     });
     logger.success('Database connected');
   } catch (error) {
-    errorHandler(new Error(error));
+    logger.error(new Error(error));
   }
 };
 

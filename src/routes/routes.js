@@ -1,4 +1,4 @@
-const userRoutes = require('./users');
+const userRoutes = require('../auth/routes/user.routes');
 
 const contextPath = '/mern/api/v1';
 

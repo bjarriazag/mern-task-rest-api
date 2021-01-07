@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 const path = require('path');
 const fs = require('fs');
-const { logger } = require('./logger');
+const logger = require('./logger')(module);
 
 const ENV_DIRECTORY = path.join(__dirname, '..', 'config', 'environment.env');
 

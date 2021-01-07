@@ -1,4 +1,5 @@
 const { format, transports, createLogger } = require('winston');
+
 const path = require('path');
 
 const { combine, timestamp, printf } = format;
@@ -37,7 +38,7 @@ const logFormat = printf((parameters) => {
     success: '[  SUCCESS ]',
     warn: '[ WARNNING ]',
   };
-  return `${timestampLog} ${logLevel[level]} : ${path.basename(__filename)} - ${message}`;
+  return `${timestampLog} ${logLevel[level]} : ${message}`;
 });
 // LOG Name
 const today = new Date();
@@ -64,15 +65,36 @@ const options = {
 const logger = createLogger(options);
 
 if (process.env.NODE_ENV !== 'production') {
-  logger.info('Logging initialized');
+  logger.info(`[ ${path.basename(__filename)} ] - Logging initialized`);
 }
 
-// Handle error Exception
-const errorHandler = (error) => {
-  const keyLogTrace = new Date().getTime();
-  logger.error(`key:${keyLogTrace} - ${error.message}`);
-  logger.trace(`key:${keyLogTrace} - ${error.stack}`);
+// Message logger
+const printLog = (filename, msg, vars) => {
+  return `[ ${filename} ] - ${msg} ${vars ? JSON.stringify(vars) : ''}`;
 };
 
-exports.logger = logger;
-exports.errorHandler = errorHandler;
+module.exports = (module) => {
+  const filename = path.basename(module.id);
+  return {
+    info: (msg, vars) => {
+      logger.info(printLog(filename, msg, vars));
+    },
+    success: (msg, vars) => {
+      logger.success(printLog(filename, msg, vars));
+    },
+    error: (error, vars) => {
+      const keyLogTrace = new Date().getTime();
+      logger.error(printLog(filename, `key:${keyLogTrace} - ${error.message}`, vars));
+      logger.trace(printLog(filename, `key:${keyLogTrace} - ${error.stack}`, vars));
+    },
+    warn: (msg, vars) => {
+      logger.warn(printLog(filename, msg, vars));
+    },
+    fail: (msg, vars) => {
+      logger.fail(printLog(filename, msg, vars));
+    },
+    debug: (msg, vars) => {
+      logger.debug(printLog(filename, msg, vars));
+    },
+  };
+};
