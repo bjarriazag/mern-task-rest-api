@@ -5,6 +5,7 @@ const start = require('./server');
 
 // Create server
 const app = express();
+app.use(express.json());
 
 // Functions
 connectDB();

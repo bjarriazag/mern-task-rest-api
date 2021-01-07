@@ -14,3 +14,4 @@ Incluye React Hooks Gatsby GraphQL Firestore Redux Context MERN Next.js Styled C
 
 234. Configurando Rutas de usuarios
 235. Agregando el Controlador para crear nuevos usuarios
+236. Enviando una petición a la API y leyendo el contenido
