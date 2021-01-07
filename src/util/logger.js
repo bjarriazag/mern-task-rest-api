@@ -82,7 +82,8 @@ module.exports = (module) => {
     success: (msg, vars) => {
       logger.success(printLog(filename, msg, vars));
     },
-    error: (error, vars) => {
+    error: (_error, vars) => {
+      const error = _error instanceof Error ? _error : new Error(_error);
       const keyLogTrace = new Date().getTime();
       logger.error(printLog(filename, `key:${keyLogTrace} - ${error.message}`, vars));
       logger.trace(printLog(filename, `key:${keyLogTrace} - ${error.stack}`, vars));

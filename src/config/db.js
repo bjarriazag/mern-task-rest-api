@@ -11,7 +11,7 @@ const connectDB = async () => {
     });
     logger.success('Database connected');
   } catch (error) {
-    logger.error(new Error(error));
+    logger.error(error);
   }
 };
 

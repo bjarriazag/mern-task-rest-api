@@ -5,7 +5,7 @@ const contextPath = '/mern/api/v1';
 const appRoutes = (app) => {
   // Health check
   app.get('/', (req, res) => {
-    res.send('[NODE] Server is running...');
+    res.send('[NODE] MERN-Server is running...');
   });
   // Routes
   // Security
