@@ -10,6 +10,7 @@ Incluye React Hooks Gatsby GraphQL Firestore Redux Context MERN Next.js Styled C
 
 ## Content
 
-- #### Section 21 : MERN: Creando la API con Node, Express y MongoDB primeros pasos
-- #### Section 22 : MERN: Creando la API - Trabajando con Usuarios
-- #### Section 23 : MERN: Creando la API - Trabajando con Autenticación de Usuarios
+### Section 23 : MERN: Creando la API - Trabajando con Autenticación de Usuarios
+
+244. Creando el Controller de Autenticación
+245. Revisando si el usuario existe, si el password es correcto o incorrecto
