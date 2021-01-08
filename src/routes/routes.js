@@ -1,4 +1,5 @@
 const userRoutes = require('../auth/routes/user.routes');
+const authRoutes = require('../auth/routes/auth.routes');
 
 const contextPath = '/mern/api/v1';
 
@@ -9,7 +10,8 @@ const appRoutes = (app) => {
   });
   // Routes
   // Security
-  app.use(`${contextPath}/auth/users`, userRoutes);
+  app.use(`${contextPath}/security/users`, userRoutes);
+  app.use(`${contextPath}/auth`, authRoutes);
 };
 
 module.exports = appRoutes;

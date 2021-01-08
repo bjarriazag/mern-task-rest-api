@@ -15,3 +15,4 @@ if (fs.existsSync(ENV_DIRECTORY)) {
 
 exports.ENVIRONMENT = process.env.NODE_ENV;
 exports.MONGODB_URI = process.env.MONGODB_URI;
+exports.JWT_SECRET = process.env.JWT_SECRET;

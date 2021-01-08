@@ -1,9 +1,9 @@
 const { StatusCodes } = require('http-status-codes');
-const bcryptjs = require('bcryptjs');
 const { validationResult } = require('express-validator');
 const { Response, ResponseData } = require('../util/imports');
 const logger = require('../../util/logger')(module);
 const User = require('../models/user.model');
+const { cryptHasher } = require('../util/crypto');
 
 // Functions
 const validationsUser = async (req, res) => {
@@ -34,6 +34,7 @@ exports.createUser = async (req, res) => {
   let user;
   const message = 'User created';
   try {
+    // Validations
     const resultValidation = await validationsUser(req, res);
     if (resultValidation) {
       return resultValidation;
@@ -41,8 +42,7 @@ exports.createUser = async (req, res) => {
     // Create user
     user = new User(req.body);
     // Secret password
-    const salt = await bcryptjs.genSalt(10);
-    user.password = await bcryptjs.hash(user.password, salt);
+    user.password = await cryptHasher(user.password);
     // Save user
     await user.save();
     logger.success(`createUser - ${message}`);

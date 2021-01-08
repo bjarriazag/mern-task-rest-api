@@ -20,3 +20,7 @@ Incluye React Hooks Gatsby GraphQL Firestore Redux Context MERN Next.js Styled C
 239. Revisando si el usuario no ha sido registrado previamente
 240. Hashear passwords en la base de datos
 241. Agregando validación a la API
+242. Que son los JWT? JSON Web Tokens
+243. Creando un JWT
+244. Creando el Controller de Autenticación
+245. Revisando si el usuario existe, si el password es correcto o incorrecto
