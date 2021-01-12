@@ -1,6 +1,6 @@
 const { StatusCodes } = require('http-status-codes');
 const { validationResult } = require('express-validator');
-const { Response, ResponseData } = require('../util/imports');
+const { Response, ResponseData, MESSAGES } = require('../util/imports');
 const logger = require('../../../util/logger')(module);
 const Project = require('../models/project.model');
 
@@ -34,6 +34,21 @@ exports.createProject = async (req, res) => {
     return res
       .status(StatusCodes.CREATED)
       .json(new Response(StatusCodes.CREATED, message, new ResponseData(project)));
+  } catch (error) {
+    logger.error(error);
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json(new Response(StatusCodes.INTERNAL_SERVER_ERROR, error));
+  }
+};
+
+exports.getProjects = async (req, res) => {
+  try {
+    const projects = await Project.find({ owner: req.user.id }).sort({ owner: -1 });
+    console.log(MESSAGES.SUCCESS);
+    return res
+      .status(StatusCodes.OK)
+      .json(new Response(StatusCodes.OK, MESSAGES.SUCCESS, new ResponseData(projects)));
   } catch (error) {
     logger.error(error);
     return res

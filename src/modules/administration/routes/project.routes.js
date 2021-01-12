@@ -13,6 +13,6 @@ router.post(
   projectController.createProject
 );
 
-router.get('/', auth, projectController.createProject);
+router.get('/', auth, projectController.getProjects);
 
 module.exports = router;

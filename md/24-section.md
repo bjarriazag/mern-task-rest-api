@@ -17,3 +17,4 @@ Incluye React Hooks Gatsby GraphQL Firestore Redux Context MERN Next.js Styled C
 248. Insertando Nuevos Proyectos
 249. Verificando si el usuario esta autenticado para crear nuevos proyectos
 250. Validación a los Proyectos
+251. Obtener Proyectos en JSON
