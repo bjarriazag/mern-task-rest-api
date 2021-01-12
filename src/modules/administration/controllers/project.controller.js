@@ -7,6 +7,7 @@ exports.createProject = async (req, res) => {
   const message = 'Project created';
   try {
     const project = new Project(req.body);
+    project.owner = req.user.id;
     await project.save();
     logger.success(`createProject - ${message}`);
     return res
