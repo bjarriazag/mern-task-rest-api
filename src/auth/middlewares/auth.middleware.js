@@ -20,9 +20,11 @@ module.exports = (req, res, next) => {
     req.user = tokenDecoded.user;
     next();
   } catch (error) {
+    let message = MESSAGES.AUTH.ERROR.INVALID_TOKEN;
     logger.error(error);
-    res
-      .status(StatusCodes.UNAUTHORIZED)
-      .json(new Response(StatusCodes.UNAUTHORIZED, MESSAGES.AUTH.ERROR.INVALID_TOKEN));
+    if (error.message === 'jwt expired') {
+      message = 'Token expired';
+    }
+    res.status(StatusCodes.UNAUTHORIZED).json(new Response(StatusCodes.UNAUTHORIZED, message));
   }
 };

@@ -15,4 +15,11 @@ router.post(
 
 router.get('/', auth, projectController.getProjects);
 
+router.put(
+  '/:projectID',
+  auth,
+  [check('name', 'Name is required').trim().not().isEmpty()],
+  projectController.updateProject
+);
+
 module.exports = router;
