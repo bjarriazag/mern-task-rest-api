@@ -16,3 +16,4 @@ Incluye React Hooks Gatsby GraphQL Firestore Redux Context MERN Next.js Styled C
 247. Agregando Routing y Controllers para Proyectos
 248. Insertando Nuevos Proyectos
 249. Verificando si el usuario esta autenticado para crear nuevos proyectos
+250. Validación a los Proyectos
