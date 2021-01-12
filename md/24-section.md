@@ -13,3 +13,4 @@ Incluye React Hooks Gatsby GraphQL Firestore Redux Context MERN Next.js Styled C
 ### Section 24 : MERN: Creando la API - Trabajando con Proyectos
 
 246. Creando el Modelo
+247. Agregando Routing y Controllers para Proyectos
