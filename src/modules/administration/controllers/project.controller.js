@@ -103,3 +103,35 @@ exports.updateProject = async (req, res) => {
       .json(new Response(StatusCodes.INTERNAL_SERVER_ERROR, 'No project found'));
   }
 };
+
+exports.deleteProject = async (req, res) => {
+  try {
+    // Get ID
+    const { projectID } = req.params;
+    const project = await Project.findById(projectID);
+    if (!project) {
+      logger.fail(`updateProject - No project found with ID ${projectID}`);
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json(new Response(StatusCodes.NOT_FOUND, 'No project found'));
+    }
+    // Verify owner
+    if (project.owner.toString() !== req.user.id) {
+      logger.fail(`updateProject - No project related to user ${projectID}`);
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json(new Response(StatusCodes.NOT_FOUND, 'Project not exist'));
+    }
+    // Delete
+    await Project.findOneAndRemove({ _id: projectID });
+    logger.success(`deleteProject - Deleted project with ID = ${projectID}`);
+    return res
+      .status(StatusCodes.OK)
+      .json(new Response(StatusCodes.OK, 'Deleted project', new ResponseData(project)));
+  } catch (error) {
+    logger.error(error);
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json(new Response(StatusCodes.INTERNAL_SERVER_ERROR, 'No project found'));
+  }
+};

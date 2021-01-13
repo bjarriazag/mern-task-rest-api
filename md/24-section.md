@@ -20,3 +20,4 @@ Incluye React Hooks Gatsby GraphQL Firestore Redux Context MERN Next.js Styled C
 251. Obtener Proyectos en JSON
 252. Actualizar Proyectos con PUT
 253. Revisando si un Proyecto existe o no
+254. Eliminar un Proyecto
