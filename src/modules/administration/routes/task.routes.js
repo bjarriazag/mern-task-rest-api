@@ -14,4 +14,6 @@ router.post(
   taskController.createTask
 );
 
+router.get('/', auth, taskController.getTasks);
+
 module.exports = router;
