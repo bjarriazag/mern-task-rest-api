@@ -13,3 +13,5 @@ Incluye React Hooks Gatsby GraphQL Firestore Redux Context MERN Next.js Styled C
 ### Section 25 : Creando la API - Trabajando con las Tareas
 
 255. Creando el Modelo
+256. Agregando Routing y Controllers
+257. Insertando tareas y el Proyecto al que pertenecen
