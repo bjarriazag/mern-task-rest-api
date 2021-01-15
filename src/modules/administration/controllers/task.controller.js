@@ -104,7 +104,7 @@ exports.updateTask = async (req, res) => {
     if (status) {
       newTask.status = status;
     }
-    // Get tasks by project
+    // Get task by id
     let task = await Task.findById(taskID);
     if (!task) {
       logger.fail(`updateTask - No task found with ID ${taskID}`);
@@ -123,5 +123,39 @@ exports.updateTask = async (req, res) => {
     return res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json(new Response(StatusCodes.INTERNAL_SERVER_ERROR, "Can't update task"));
+  }
+};
+
+exports.deleteTask = async (req, res) => {
+  const message = 'Task deleted';
+  try {
+    const { taskID } = req.params;
+    // Get project
+    const { projectID } = req.body;
+    const project = await Project.findById(projectID);
+    // Validations
+    const resultValidation = await validations(req, res, projectID, project);
+    if (resultValidation) {
+      return resultValidation;
+    }
+    // Get task by id
+    const task = await Task.findById(taskID);
+    if (!task) {
+      logger.fail(`deleteTask - No task found with ID ${taskID}`);
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json(new Response(StatusCodes.NOT_FOUND, 'No task found'));
+    }
+    // Delete
+    await Task.findOneAndRemove({ _id: taskID });
+    logger.success(`deleteTask - ${message}`);
+    return res
+      .status(StatusCodes.OK)
+      .json(new Response(StatusCodes.OK, message, new ResponseData(task)));
+  } catch (error) {
+    logger.error(error);
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json(new Response(StatusCodes.INTERNAL_SERVER_ERROR, "Can't delete task"));
   }
 };
