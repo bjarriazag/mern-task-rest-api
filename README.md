@@ -14,4 +14,4 @@ Incluye React Hooks Gatsby GraphQL Firestore Redux Context MERN Next.js Styled C
 - #### Section 22 : MERN: Creando la API - Trabajando con Usuarios
 - #### Section 23 : MERN: Creando la API - Trabajando con Autenticación de Usuarios
 - #### Section 24 : MERN: Creando la API - Trabajando con Proyectos
-- #### Section 25 : Creando la API - Trabajando con las Tareas
+- #### Section 25 : MERN: Creando la API - Trabajando con las Tareas
