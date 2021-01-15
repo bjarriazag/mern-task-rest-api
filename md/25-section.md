@@ -16,3 +16,4 @@ Incluye React Hooks Gatsby GraphQL Firestore Redux Context MERN Next.js Styled C
 256. Agregando Routing y Controllers
 257. Insertando tareas y el Proyecto al que pertenecen
 258. Obtener tareas por proyecto
+259. Actualizar Tareas

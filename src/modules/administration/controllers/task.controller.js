@@ -18,14 +18,14 @@ const validations = async (req, res, projectID, project) => {
   // Own validations
   // Get project
   if (!project) {
-    logger.fail(`createTask - No project found with ID ${projectID}`);
+    logger.fail(`tasks - No project found with ID ${projectID}`);
     return res
       .status(StatusCodes.NOT_FOUND)
       .json(new Response(StatusCodes.NOT_FOUND, 'No project found'));
   }
   // Verify owner
   if (project.owner.toString() !== req.user.id) {
-    logger.fail(`createTask - No project ${projectID} related to user ${req.user.id}`);
+    logger.fail(`tasks - No project ${projectID} related to user ${req.user.id}`);
     return res
       .status(StatusCodes.NOT_FOUND)
       .json(new Response(StatusCodes.NOT_FOUND, 'Project not exist'));
@@ -81,5 +81,47 @@ exports.getTasks = async (req, res) => {
     return res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json(new Response(StatusCodes.INTERNAL_SERVER_ERROR, "Can't list tasks"));
+  }
+};
+
+exports.updateTask = async (req, res) => {
+  const message = 'Task updated';
+  try {
+    const { taskID } = req.params;
+    // Get project
+    const { projectID, name, status } = req.body;
+    const project = await Project.findById(projectID);
+    // Validations
+    const resultValidation = await validations(req, res, projectID, project);
+    if (resultValidation) {
+      return resultValidation;
+    }
+    // Update task
+    const newTask = {};
+    if (name) {
+      newTask.name = name;
+    }
+    if (status) {
+      newTask.status = status;
+    }
+    // Get tasks by project
+    let task = await Task.findById(taskID);
+    if (!task) {
+      logger.fail(`updateTask - No task found with ID ${taskID}`);
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json(new Response(StatusCodes.NOT_FOUND, 'No task found'));
+    }
+    // Update
+    task = await Task.findOneAndUpdate({ _id: taskID }, newTask, { new: true });
+    logger.success(`updateTask - ${message}`);
+    return res
+      .status(StatusCodes.OK)
+      .json(new Response(StatusCodes.OK, message, new ResponseData(task)));
+  } catch (error) {
+    logger.error(error);
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json(new Response(StatusCodes.INTERNAL_SERVER_ERROR, "Can't update task"));
   }
 };

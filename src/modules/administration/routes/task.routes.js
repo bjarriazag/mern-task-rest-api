@@ -16,4 +16,6 @@ router.post(
 
 router.get('/', auth, taskController.getTasks);
 
+router.put('/:taskID', auth, taskController.updateTask);
+
 module.exports = router;
